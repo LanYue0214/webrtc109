@@ -27,21 +27,10 @@ var room = prompt('Enter room name:');
 var socket = io.connect();
 
 //Ask server to add in the room if room name is provided by the user
-while(room === ''){
-  room = prompt('please enter room name again:');
-}
-/*
-socket.emit('create or join', room);
-console.log('Attempted to create or  join room', room);
-*/
 if (room !== '') {
   socket.emit('create or join', room);
   console.log('Attempted to create or  join room', room);
 }
-/*else
-{
-  room = prompt('please enter room name again:');
-}*/
 
 //Defining socket events
 
@@ -144,18 +133,9 @@ function maybeStart() {
     isStarted = true;
     console.log('isInitiator', isInitiator);
     if (isInitiator) {
-      log('isInitiator here!');
       doCall();
     }
   }
-  else if(isStarted)
-    console.log('isStarted error');
-  //else if(typeof localStream==='undefined')
-  //  console.log('localstream error');
-  else if(!isChannelReady)
-    console.log('ischannel error');
-  else
-    console.log('localstream error');
 }
 
 //Sending bye if user closes the window
@@ -169,7 +149,7 @@ function createPeerConnection() {
   try {
     pc = new RTCPeerConnection(pcConfig);
     pc.onicecandidate = handleIceCandidate;
-    pc.ontrack = handleRemoteStreamAdded;
+    pc.onaddstream = handleRemoteStreamAdded;
     pc.onremovestream = handleRemoteStreamRemoved;
     console.log('Created RTCPeerConnnection');
   } catch (e) {
