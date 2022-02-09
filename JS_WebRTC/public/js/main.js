@@ -144,6 +144,7 @@ function maybeStart() {
     isStarted = true;
     console.log('isInitiator', isInitiator);
     if (isInitiator) {
+      log('isInitiator here!');
       doCall();
     }
   }

@@ -50,16 +50,15 @@ io.sockets.on('connection', function(socket) {
   
 	socket.on('create or join', function(room) {
 	  log('Received request to create or join room ' + room);
-	  
-	  /*var roomo = io.sockets.adapter.get(room);
-	  var clientsInRoom = roomo.length;*/
+
 	  //var clientsInRoom = io.sockets.adapter.rooms.get(room).size;
 	  var clientsInRoom = io.sockets.adapter.rooms[room];
 	  log('clientinroom: '+ clientsInRoom);
-	  //log(' ' + Object.keys(clientsInRoom).length );
+	  //log('test length; ' + Object.keys(clientsInRoom).length ); //(.length) is error
 	  
-	  var numClients = clientsInRoom  ? Object.keys(clientsInRoom.sockets): 0;
-	  //var numClients = clientsInRoom ? Object.keys(clientsInRoom).length : 0;
+	//log('tet object.keys(clientsInRoom.sockets): '+Object.keys(clientsInRoom));
+	  //var numClients = clientsInRoom  ? Object.keys(clientsInRoom.sockets): 0;
+	  var numClients = clientsInRoom ? Object.keys(clientsInRoom).length : 0;
 	  log('numClients: '+ numClients);
 	  log('Room ' + room + ' now has ' + numClients + ' client(s)');
   
